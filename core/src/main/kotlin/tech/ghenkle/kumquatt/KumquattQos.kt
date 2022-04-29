@@ -1,4 +1,4 @@
-package tech.ghenkle.kumquatt.core
+package tech.ghenkle.kumquatt
 
 /**
  * The quality of service level attached to a MQTT message.

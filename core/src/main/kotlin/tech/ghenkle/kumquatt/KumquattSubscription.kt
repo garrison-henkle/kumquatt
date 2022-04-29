@@ -1,4 +1,4 @@
-package tech.ghenkle.kumquatt.core
+package tech.ghenkle.kumquatt
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.awaitClose

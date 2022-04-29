@@ -1,4 +1,4 @@
-package tech.ghenkle.kumquatt.core
+package tech.ghenkle.kumquatt
 
 enum class KumquattScheme(val string: String){
     TCP("tcp"),

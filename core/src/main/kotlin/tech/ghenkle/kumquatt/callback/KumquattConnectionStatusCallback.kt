@@ -2,7 +2,7 @@ package tech.ghenkle.kumquatt.callback
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener
 import org.eclipse.paho.client.mqttv3.IMqttToken
-import tech.ghenkle.kumquatt.core.Kumquatt
+import tech.ghenkle.kumquatt.Kumquatt
 import tech.ghenkle.kumquatt.data.KumquattToken
 import tech.ghenkle.kumquatt.exception.KumquattException
 

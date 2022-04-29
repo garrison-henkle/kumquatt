@@ -2,7 +2,7 @@ package tech.ghenkle.kumquatt.data
 
 import com.beust.klaxon.Klaxon
 import org.eclipse.paho.client.mqttv3.MqttMessage
-import tech.ghenkle.kumquatt.core.KumquattQos
+import tech.ghenkle.kumquatt.KumquattQos
 import tech.ghenkle.kumquatt.utils.utf8
 import tech.ghenkle.kumquatt.utils.utf8Bytes
 

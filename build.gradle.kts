@@ -1,38 +1,28 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.20"
-    application
+    kotlin("jvm") version "1.6.21" apply false
 }
 
-group = "tech.ghenkle"
-version = "1.0.0"
+subprojects{
+    group = "tech.ghenkle.kumquatt"
+    version = "1.0.0"
 
-repositories {
-    mavenCentral()
-}
+    apply{
+        plugin("org.jetbrains.kotlin.jvm")
+    }
 
-dependencies {
-    //kotlin
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
+    repositories {
+        mavenCentral()
+    }
 
-    //networking
-    implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
+    val implementation by configurations
 
-    //json
-    implementation("com.beust:klaxon:5.6")
+    dependencies {
+        implementation(kotlin("stdlib-jdk8"))
+    }
 
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
-}
-
-application {
-    mainClass.set("tech.ghenkle.kumquatt.MainKt")
+    tasks.withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "11"
+    }
 }

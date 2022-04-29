@@ -1,11 +1,11 @@
-package tech.ghenkle.kumquatt.core
+package tech.ghenkle.kumquatt
 
 import com.beust.klaxon.Klaxon
 import org.eclipse.paho.client.mqttv3.*
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
 import tech.ghenkle.kumquatt.callback.KumquattConnectionStatusCallback
 import tech.ghenkle.kumquatt.callback.KumquattStatusCallback
-import tech.ghenkle.kumquatt.core.KumquattScheme.*
+import tech.ghenkle.kumquatt.KumquattScheme.*
 import tech.ghenkle.kumquatt.data.KumquattMessage
 import tech.ghenkle.kumquatt.data.KumquattToken
 import tech.ghenkle.kumquatt.exception.KumquattException
