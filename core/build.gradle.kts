@@ -1,7 +1,12 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+@file:Suppress("UnstableApiUsage")
+
+import com.vanniktech.maven.publish.JavadocJar.Dokka
+import com.vanniktech.maven.publish.KotlinJvm
+import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins{
     `java-library`
+    id("org.jetbrains.dokka") version "1.6.21"
 }
 
 dependencies {
@@ -15,6 +20,55 @@ dependencies {
     implementation("com.beust:klaxon:5.6")
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+/* Sources */
+
+val sourcesJar by tasks.creating(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allSource)
+}
+
+/* Javadoc */
+
+val dokkaOutputDir = "$buildDir/dokka"
+val dokka = tasks.getByName<DokkaTask>("dokkaHtml") {
+    outputDirectory.set(file(dokkaOutputDir))
+}
+
+val deleteDokkaOutputDir by tasks.register<Delete>("deleteDokkaOutputDirectory") {
+    delete(dokkaOutputDir)
+}
+
+val javadocJar = tasks.register<Jar>("javadocJar") {
+    dependsOn(deleteDokkaOutputDir, dokka)
+    archiveClassifier.set("javadoc")
+    from(dokkaOutputDir)
+}
+
+/* Assembling */
+
+//base{
+//    archivesName.set("kumquatt")
+//}
+
+artifacts {
+    archives(sourcesJar)
+    archives(javadocJar)
+    archives(tasks.jar)
+}
+
+/* Publishing */
+
+publishing{
+    publications.withType<MavenPublication>{
+        artifactId = "kumquatt"
+    }
+}
+
+mavenPublishing{
+    configure(
+        KotlinJvm(
+            javadocJar = Dokka("dokkaHtml"),
+            sourcesJar = true
+        )
+    )
 }
