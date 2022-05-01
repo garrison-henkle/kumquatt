@@ -40,5 +40,13 @@ fun main() {
             )
             println("Sent: $message2")
         }
+
+        scope.launch {
+            delay(8_000)
+
+            println("Disconnecting. If you don't disconnect, the lock files Paho creates will not be cleaned up.")
+            disconnectAndClose()
+
+        }
     }
 }

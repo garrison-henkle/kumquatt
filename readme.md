@@ -1,5 +1,7 @@
 # Kumquatt
 
+[![Maven Central](https://img.shields.io/maven-central/v/tech.ghenkle/kumquatt.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22tech.ghenkle%22%20AND%20a:%22kumquatt%22)
+
 Kumquatt is a Kotlin MQTT client library that wraps the Eclipse Paho Java client. Kumquatt takes advantage of Kotlin's
 coroutines and concise syntax to greatly simplify Paho's usage. Take the following subscription operation in Paho:
 
@@ -30,6 +32,32 @@ Kumquatt.withHost(host = "test.mosquitto.org").connect {
 
 Kumquatt replaces Paho's callback-heavy syntax with a concise DSL. It also improves upon subscribing by exposing a
 cold data stream for receiving messages.
+
+# Download
+
+Kumquatt is available on the <a href="https://search.maven.org/artifact/tech.ghenkle/kumquatt">Maven Central Repository</a>:
+
+#### Gradle (Kotlin):
+
+```
+implementation("tech.ghenkle:kumquatt:1.0.0")
+```
+
+#### Gradle (Groovy):
+
+```
+implementation 'tech.ghenkle:kumquatt:1.0.0'
+```
+
+#### Maven:
+
+```
+<dependency>
+  <groupId>tech.ghenkle</groupId>
+  <artifactId>kumquatt</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
 
 # Usage
 

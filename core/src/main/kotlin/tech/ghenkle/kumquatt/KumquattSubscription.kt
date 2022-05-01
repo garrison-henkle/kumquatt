@@ -1,9 +1,11 @@
 package tech.ghenkle.kumquatt
 
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.onFailure
 import kotlinx.coroutines.channels.trySendBlocking
+import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.cancellable
 import org.eclipse.paho.client.mqttv3.IMqttActionListener
@@ -41,7 +43,7 @@ class KumquattSubscription(
         val messageCallback = object : KumquattMessageCallback {
             override fun close() = this@callbackFlow.cancel()
             override fun messageArrived(topic: String, message: MqttMessage) {
-                trySendBlocking(KumquattMessage(mqttMessage = message, topic = topic))
+                trySend(KumquattMessage(mqttMessage = message, topic = topic))
                     .onFailure { ex -> ex?.also{ throw KumquattException(it) } }
             }
         }
@@ -50,7 +52,7 @@ class KumquattSubscription(
             unsubscribe()
             closeFlow()
         }
-    }
+    }.buffer(capacity = Channel.BUFFERED)
 
     /**
      * Collects from this subscription using the subscription's current [scope].
